@@ -2,6 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
+/**
+ * @param {Object} props 
+ * @returns The JSX element of a single square.
+ */
 function Square(props) {
 
 	return (
@@ -12,8 +16,15 @@ function Square(props) {
 
 }
 
+/**
+ * 
+ */
 class Board extends React.Component {
 
+	/**
+	 * @param {number} i The index of the square on the board.
+	 * @returns {JSX.Element} The JSX element of a single square on the board.
+	 */
 	renderSquare(i) {
 		const line = this.props.line;
 
@@ -50,8 +61,15 @@ class Board extends React.Component {
 
 }
 
+/**
+ * 
+ */
 class Game extends React.Component {
 
+	/**
+	 * Constructs the Game object.
+	 * @param {Object} props 
+	 */
 	constructor(props) {
 		super(props);
 
@@ -63,7 +81,11 @@ class Game extends React.Component {
 			xIsNext: true
 		}
 	}
-	
+
+	/**
+	 * Handles entering a new move on the board and saving the previous state.
+	 * @param {number} i The index of the square that was clicked.
+	 */
 	handleClick(i) {
 		const history = this.state.history.slice(0, this.state.stepNumber + 1);
 		const current = history[history.length - 1];
@@ -84,6 +106,10 @@ class Game extends React.Component {
 		});
 	}
 
+	/**
+	 * Sets the board to the specified state.
+	 * @param {number} step The board state to switch to.
+	 */
 	jumpTo(step) {
 		this.setState({
 			stepNumber: step,
@@ -143,6 +169,11 @@ ReactDOM.render(
 	document.getElementById('root')
 );
 
+/**
+ * 
+ * @param {Array<String>} squares 
+ * @returns {Object} An object that holds the winning player and the associated winning line of squares.
+ */
 function calculateWinner(squares) {
 	const lines = [
 		[0, 1, 2],
